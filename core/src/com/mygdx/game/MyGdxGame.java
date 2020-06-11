@@ -134,19 +134,19 @@ public class MyGdxGame extends ApplicationAdapter {
 
                 font.draw(batch,"return",0,y);
 
-                //显示玩家信息
+                //Display player information
                 font.draw(batch,"HP:"+hp,x-50,y);
                 font.draw(batch,"SCORE:"+score,x-80,y-20);
 
 
-                //随机绘制炸弹、金币
-                batch.draw(playimg,playx,0);//绘制玩家
+                //Randomly draw bombs and gold coins
+                batch.draw(playimg,playx,0);//Draw player
 
                 int N=(int)(Math.random()*100);
 
                 if(N-score>0){
                     int dw=(int)(Math.random()*100);
-                    if(dw>97){//绘制金币
+                    if(dw>97){//Draw bomb
                         enemy jinp = new enemy(0,new Texture("bomb.png"));
                         float xx=(float)(Math.random()*x/2+100);
                         batch.draw(jinp.enemyimg,xx,y);
@@ -229,7 +229,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		font.dispose();
 	}
 
-	//碰撞检测
+	//Impact checking
     void collision(){
 	    for(int i=0;i<enemylis.size();++i){
 	        if(enemylis.get(i).id==0){
@@ -258,7 +258,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	    return false;
     }
 
-    //胜负判断
+    //Victory and defeat
     boolean victory(){
 	    if(hp<=0){
 	        scene=0;
@@ -272,7 +272,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	    return false;
     }
 
-    //金币、炸弹向下运动
+    //Gold coins and bombs moving down
     void move(){
        for(int i=0;i<enemylis.size();++i){
            enemylis.get(i).y-=enemylis.get(i).getSpeed();
