@@ -24,6 +24,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
     //player
     Texture playimg;
+    float playx=0;
     int score=0;
     int scoreed=0;
     int hp=5;
@@ -59,8 +60,12 @@ public class MyGdxGame extends ApplicationAdapter {
 		img = new Texture("play.png");
 		img1=new Texture("score.png");
 
+		playimg=new Texture("basket.png");
+
+
 		x=Gdx.graphics.getWidth();
 		y=Gdx.graphics.getHeight();
+
 	}
 
 	@Override
@@ -71,6 +76,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		switch (scene){
             case 0:{
+                playx=x/2-50;
                 batch.draw(img, x/2-50, y/2+50);
                 batch.draw(img1, x/2-50, y/2-20);
 
@@ -102,6 +108,30 @@ public class MyGdxGame extends ApplicationAdapter {
 
                 //Draw player, player score, player HP
                 //Randomly draw the coins and bombs falling from the sky to get the gold score +1 to get the bomb HP-1 Player HP<=0 The end of the game The more difficult the game is, the greater the difficulty will be. The game will record the score
+
+                font.draw(batch,"return",0,y-20);
+
+                //随机绘制炸弹、金币
+                batch.draw(playimg,playx,0);
+
+
+                int mx=Gdx.input.getX();
+                int my=Gdx.input.getY();
+                my=y-my;
+
+                boolean pan = Gdx.input.isButtonPressed(Input.Buttons.LEFT);
+
+                if(pan){
+                    if(mx>0&&mx<40
+                            &&my>y-20&&my<y){
+                        scene=0;
+                    }else{
+                        if((mx+71)<=x){
+                            playx=mx;
+                        }
+                    }
+                }
+
 
             }break;
 
